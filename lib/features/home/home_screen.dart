@@ -92,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
         }
 
         return _buildSection(
-          "Number of checks: ${homeBloc.numberOfCheck}",
+          "Number of checks: ${homeBloc.numberOfCheck} Number of failed checks ${homeBloc.numberOfFailedCheck}",
           children: [
             ListView.builder(
               itemCount: wordList.length,

@@ -18,6 +18,7 @@ class HomeBloc {
   late BuildContext context;
   String balance = "0";
   int numberOfCheck = 0;
+  int numberOfFailedCheck = 0;
 
   //endregion
 
@@ -57,8 +58,6 @@ class HomeBloc {
     seedWordsCtrl.sink.add(words);
     //Get private key
     getPrivateKey(words);
-    //Increase number of checks
-    numberOfCheck = numberOfCheck + 1;
   }
 
   //endregion
@@ -105,6 +104,8 @@ class HomeBloc {
       balanceCtrl.sink.add(HomeState.Loading);
       //Api call
       balance = await BalanceCheckService().getBalance(address: address);
+      //Increase number of checks
+      numberOfCheck = numberOfCheck + 1;
       //Success
       balanceCtrl.sink.add(HomeState.Success);
       //Get seed words
@@ -112,11 +113,15 @@ class HomeBloc {
     } on ApiErrorResponseMessage catch (error) {
       //Failed
       balanceCtrl.sink.add(HomeState.Failed);
+      //Check failed count
+      numberOfFailedCheck = numberOfFailedCheck +1;
       getSeedWords();
 
     } catch (error) {
       //Failed
       balanceCtrl.sink.add(HomeState.Failed);
+      //Check failed count
+      numberOfFailedCheck = numberOfFailedCheck +1;
       getSeedWords();
 
     }
