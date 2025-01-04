@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:create_wallet/features/home/web_view_screen.dart';
 import 'package:create_wallet/model/api_response_message.dart';
@@ -17,6 +18,7 @@ class HomeBloc {
   //region Common variable
   late BuildContext context;
   String balance = "0";
+  int balanceAddress = 0;
   int numberOfCheck = 0;
   int numberOfFailedCheck = 0;
 
@@ -44,23 +46,34 @@ class HomeBloc {
 //endregion
 
 
+  // Generate a strength value that is a multiple of 32 within a desired range
+  int generateStrength() {
+    final rng = Random();
+    int strength = rng.nextInt(13) + 12; // Generates a number between 12 and 24
+    // Ensure the strength is a multiple of 32
+    return (strength ~/ 32) * 32;
+  }
+
 //region Get seed words
   void getSeedWords() {
 
     //If balance is not 0
     if (balance != "0") {
-      print(balance);
+      //print(balance);
       return;
     }
 
-    String words = bip39.generateMnemonic();
-    print("Seed phase are : ${words}");
+    String words = bip39.generateMnemonic(strength: 256);
+    //print("Seed phase are : ${words}");
     seedWordsCtrl.sink.add(words);
     //Get private key
     getPrivateKey(words);
   }
 
   //endregion
+
+
+
 
 //region Get private key
   void getPrivateKey(String mnemonic) async {
@@ -99,11 +112,15 @@ class HomeBloc {
 //region Get balance
   void getBalance({required String address}) async {
     try {
-      print("Address is : $address");
+      //print("Address is : $address");
       //Loading
       balanceCtrl.sink.add(HomeState.Loading);
       //Api call
       balance = await BalanceCheckService().getBalance(address: address);
+      //If Balance is more then 0
+      if(balance != "0"){
+        balanceAddress = balanceAddress + 1;
+      }
       //Increase number of checks
       numberOfCheck = numberOfCheck + 1;
       //Success

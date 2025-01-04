@@ -15,17 +15,17 @@ class HttpService {
     var header = {"content-type": "application/json", "authorization": "Bearer $token"};
     //  Request Body
     var body = json.encode(param);
-    print(body);
+    //print(body);
     //  parsed Url
     var url = Uri.parse(apiUrl);
-    print(url);
+    //print(url);
     //  Timeout duration
     var duration =  const Duration(seconds: AppConstants.apiTimeOutInSecond);
 
     try {
       //  Execute Http Post
       var response = await http.post(url, body: body, headers: header).timeout(duration);
-        print(response.body);
+        //print(response.body);
       // region check if response is null
       if (response.body.isEmpty) {
         throw Exception("$apiUrl returned empty response.");
@@ -51,7 +51,7 @@ class HttpService {
       //#region Region - Handle Http 200 api error
       // var isStatusOk = jsonResponse["message"] == "success";
       // if (!isStatusOk) {
-      //   print(json.decode(response.body));
+      //   //print(json.decode(response.body));
       //   throw ApiErrorResponseMessage.fromJson(json.decode(response.body));
       // }
       // endregion
@@ -77,17 +77,17 @@ class HttpService {
     var header = {"content-type": "application/json", "authorization": "Bearer $token"};
     //  Request Body
     var body = json.encode(param);
-    print(body);
+    //print(body);
     //  parsed Url
     var url = Uri.parse(apiUrl);
-    print(url);
+    //print(url);
     //  Timeout duration
     var duration =  const Duration(seconds: AppConstants.apiTimeOutInSecond);
 
     try {
       //  Execute Http Post
       var response = await http.put(url, body: body, headers: header).timeout(duration);
-      print(response.body);
+      //print(response.body);
       // region check if response is null
       if (response.body.isEmpty) {
         throw Exception("$apiUrl returned empty response.");
@@ -113,7 +113,7 @@ class HttpService {
       //#region Region - Handle Http 200 api error
       // var isStatusOk = jsonResponse["message"] == "success";
       // if (!isStatusOk) {
-      //   print(json.decode(response.body));
+      //   //print(json.decode(response.body));
       //   throw ApiErrorResponseMessage.fromJson(json.decode(response.body));
       // }
       // endregion
@@ -142,7 +142,7 @@ class HttpService {
     // var body = json.encode(param);
     //  parsed Url
     var url = Uri.parse(apiUrl);
-     print(url);
+     //print(url);
     //  Timeout duration
     var duration = const Duration(seconds: AppConstants.apiTimeOutInSecond);
 
@@ -150,7 +150,7 @@ class HttpService {
       //  Execute Http Post
       var response = await http.get(url, headers: header).timeout(duration);
 
-      print(response.body.toString());
+      //print(response.body.toString());
 
       // region check if response is null
       if (response.body.isEmpty) {
@@ -177,7 +177,7 @@ class HttpService {
       //#region Region - Handle Http 200 api error
       var isStatusOk = jsonResponse["message"] == "success";
       if (jsonResponse.containsValue("not exists")) {
-        print(json.decode("error is ${response.body}"));
+        //print(json.decode("error is ${response.body}"));
         throw ApiErrorResponseMessage(message: "not exists");
       }
       // endregion
@@ -200,17 +200,17 @@ class HttpService {
     var header = {"content-type": "application/json", "authorization": "Bearer $token"};
     //  Request Body
     var body = json.encode(param);
-    print(body);
+    //print(body);
     //  parsed Url
     var url = Uri.parse(apiUrl);
-    print(url);
+    //print(url);
     //  Timeout duration
     var duration =  const Duration(seconds: AppConstants.apiTimeOutInSecond);
 
     try {
       //  Execute Http Post
       var response = await http.delete(url, body: body, headers: header).timeout(duration);
-      print(response.body);
+      //print(response.body);
       // region check if response is null
       if (response.body.isEmpty) {
         throw Exception("$apiUrl returned empty response.");
@@ -236,7 +236,7 @@ class HttpService {
       //#region Region - Handle Http 200 api error
       // var isStatusOk = jsonResponse["message"] == "success";
       // if (!isStatusOk) {
-      //   print(json.decode(response.body));
+      //   //print(json.decode(response.body));
       //   throw ApiErrorResponseMessage.fromJson(json.decode(response.body));
       // }
       // endregion
@@ -271,7 +271,7 @@ class HttpService {
       //  Execute Http Post
       var response = await http.delete(url, headers: header).timeout(duration);
 
-      print(response.body);
+      //print(response.body);
       // region check if response is null
       if (response.body.isEmpty) {
         throw Exception("$apiUrl returned empty response.");
@@ -297,7 +297,7 @@ class HttpService {
       //#region Region - Handle Http 200 api error
       // var isStatusOk = jsonResponse["message"] == "success";
       // if (!isStatusOk) {
-      //   print(json.decode(response.body));
+      //   //print(json.decode(response.body));
       //   throw ApiErrorResponseMessage.fromJson(json.decode(response.body));
       // }
       // endregion
@@ -321,17 +321,17 @@ class HttpService {
     var header = {"content-type": "application/json", "authorization": "Bearer $token"};
     //  Request Body
     var body = json.encode(param);
-    print(body);
+    //print(body);
     //  parsed Url
     var url = Uri.parse(apiUrl);
-    print(url);
+    //print(url);
     //  Timeout duration
     var duration =  const Duration(seconds: AppConstants.apiTimeOutInSecond);
 
     try {
       //  Execute Http Post
       var response = await http.patch(url, body: body, headers: header).timeout(duration);
-      // print(response.body);
+      // //print(response.body);
       // region check if response is null
       if (response.body.isEmpty) {
         throw Exception("$apiUrl returned empty response.");
@@ -341,7 +341,7 @@ class HttpService {
       // decode json
       jsonResponse = json.decode(response.body.toString());
 
-      print(jsonResponse);
+      //print(jsonResponse);
 
       // Region - Handle Http 400
       if (response. statusCode == 400) {
@@ -359,7 +359,7 @@ class HttpService {
       //#region Region - Handle Http 200 api error
       // var isStatusOk = jsonResponse["message"] == "success";
       // if (!isStatusOk) {
-      //   print(json.decode(response.body));
+      //   //print(json.decode(response.body));
       //   throw ApiErrorResponseMessage.fromJson(json.decode(response.body));
       // }
       // endregion

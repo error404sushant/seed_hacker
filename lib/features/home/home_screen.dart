@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 import 'home_bloc.dart';
@@ -92,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
         }
 
         return _buildSection(
-          "Number of checks: ${homeBloc.numberOfCheck} Number of failed checks ${homeBloc.numberOfFailedCheck}",
+          "Number of checks: ${homeBloc.numberOfCheck} \nNumber of failed checks ${homeBloc.numberOfFailedCheck} \n Balanced address ${homeBloc.balanceAddress}",
           children: [
             ListView.builder(
               itemCount: wordList.length,
@@ -126,8 +127,23 @@ class _HomeScreenState extends State<HomeScreen> {
         if (snapshot.data!.isEmpty) {
           return _buildSection("No address");
         }
-        return _buildSection(
-          "Ethereum address: ${snapshot.data!}",
+        return CupertinoButton(
+          onPressed: (){
+            // Copy text to clipboard
+            Clipboard.setData(ClipboardData(text: snapshot.data!));
+
+            // Show snackbar
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('Copied to clipboard!'),
+                duration: Duration(seconds: 2),
+              ),
+            );
+          },
+          padding: EdgeInsets.zero,
+          child: _buildSection(
+            "Ethereum address: ${snapshot.data!}",
+          ),
         );
       },
     );
